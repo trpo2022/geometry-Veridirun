@@ -1,7 +1,6 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-//#define M_PI 3.1415
 #define SIZE_STR 100
 
 float OutputCirclePerim(float r)
@@ -35,7 +34,7 @@ int main()
     char* fname = "lab_input.txt"; //название файла
     file = fopen(fname, "r");      //открываем файл
 
-    int C[SIZE_STR]; //объ€вл€ем массив символов
+    int C[SIZE_STR];
     int i = 0;
     int iL, iD = 0, iR;
     float x_circle = 0, y_circle = 0, radius = 0;
@@ -64,7 +63,7 @@ int main()
         && (C[i + 4] == 'l' || C[i + 4] == 'L')
         && (C[i + 5] == 'e' || C[i + 5] == 'E')
         && (C[i + 6] == ' ' || C[i + 6] == '(')) {
-        //		printf("word circle is correct\n");
+
         i += 6;
     } else {
         printf("word circle is not correct\n");
@@ -73,10 +72,11 @@ int main()
 
     for (; C[i] == ' '; i++)
         ;
-    if ((C[i] == '(' && C[i + 1] == '(')) {
-        i += 2;
+    if ((C[i] == '(')) {
+        i ++;
     } else {
         printf("opening brackets are not correct\n");
+        return 4;
     }
 
     for (; C[i] == ' '; i++)
@@ -89,7 +89,7 @@ int main()
     }
     iR = i;
     i--;
-    //	printf("iL=%d iD=%d iR=%d i=%d C[i]=%c\n",iL, iD, iR, i, C[i]);
+    
 
     for (; (i != iD) && iD != 0; i--) {
         x_circle += powf(10, -(i - iD)) * (C[i] - 48);
@@ -97,7 +97,7 @@ int main()
     for (i--; i != iL - 1; i--) {
         x_circle += pow(10, (iD - i - 1)) * (C[i] - 48);
     }
-    //	printf("x_circle=%f\n", x_circle);
+    
     i = iR;
     iD = 0;
 
@@ -112,7 +112,7 @@ int main()
     }
     iR = i;
     i--;
-    //	printf("iL=%d iD=%d iR=%d i=%d C[i]=%c\n",iL, iD, iR, i, C[i]);
+    
 
     for (; (i != iD) && iD != 0; i--) {
         y_circle += powf(10, -(i - iD)) * (C[i] - 48);
@@ -120,7 +120,6 @@ int main()
     for (i--; i != iL - 1; i--) {
         y_circle += pow(10, (iD - i - 1)) * (C[i] - 48);
     }
-    //	printf("y_circle=%f\n", y_circle);
     i = iR;
     iD = 0;
 
@@ -143,22 +142,21 @@ int main()
     }
     iR = i;
     i--;
-    //	printf("iL=%d iD=%d iR=%d i=%d C[i]=%c\n",iL, iD, iR, i, C[i]);
+ 
     for (; (i != iD) && iD != 0; i--) {
         radius += powf(10, -(i - iD)) * (C[i] - 48);
     }
     for (i--; i != iL - 1; i--) {
         radius += pow(10, (iD - i - 1)) * (C[i] - 48);
     }
-    //	printf("radius=%f\n", radius);
+    
     i = iR;
 
     for (; C[i] == ' '; i++)
         ;
-    //	printf("iL=%d iD=%d iR=%d i=%d C[i]=%c\n",iL, iD, iR, i, C[i]);
-    if (C[i] == ')' && C[i + 1] == ')') {
-        //		printf("line should be correct\n");
-        i += 2;
+    
+    if (C[i] == ')') {
+        i ++ ;
     } else {
         printf("closing brackets are not correct");
         return 3;
@@ -176,8 +174,8 @@ int main()
            radius); //есть проблема, что по€вл€ютс€ погрешности в числах с
                     //плавающей точкой
 
-    // printf("%f   %f\n", OutputCirclePerim(3),OutputCircleSq(3));
-    // printf("%f", OutputTriangleSq(2,1,3,4,5,2));
+    
+   
     return 0;
 }
 
