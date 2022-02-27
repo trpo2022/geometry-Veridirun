@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define SIZE_STR 100
+#define M_PI 3.1415
 
 float OutputCirclePerim(float r)
 {
@@ -35,6 +36,7 @@ int main()
     file = fopen(fname, "r");      //открываем файл
 
     int C[SIZE_STR];
+    char circleName[]="circle";
     int i = 0;
     int iL, iD = 0, iR;
     float x_circle = 0, y_circle = 0, radius = 0;
@@ -168,7 +170,7 @@ int main()
         i++;
     }
 
-    printf("circle(%f %f, %f)",
+    printf("%s(%f %f, %f)", circleName,
            x_circle,
            y_circle,
            radius); //есть проблема, что появляются погрешности в числах с
