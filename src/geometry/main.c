@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "geom_string.c"
+#include "geom_string.h"
 #define SIZE_STR 100
 
 float OutputCirclePerim(float r)
