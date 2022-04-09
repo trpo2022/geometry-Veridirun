@@ -6,8 +6,8 @@
 int ProcessGeomFile()
 {
     FILE* file;
-    char* fname = "lab_input.txt"; //название файла
-    file = fopen(fname, "r");      //открываем файл
+    char* fname = "lab_input.txt";
+    file = fopen(fname, "r");
 
     int C[SIZE_STR];
     char circleName[] = "circle";
@@ -15,19 +15,16 @@ int ProcessGeomFile()
     int iL, iD = 0, iR;
     float x_circle = 0, y_circle = 0, radius = 0;
 
-    if (file == NULL) //если открыть не получилось, то закрываемся
-    {
+    if (file == NULL) {
         printf("unable to open file '%s'", fname);
         return 10;
     }
 
-    C[i] = fgetc(file); //считываем первый символ в c[0]
+    C[i] = fgetc(file);
 
-    while (C[i] != EOF) //пока не встретим конец файла, выполняем цикл
-    {
+    while (C[i] != EOF) {
         i++;
-        C[i] = fgetc(file); //в очередной элемент массива присваиваем ascii-код
-                            //символа
+        C[i] = fgetc(file);
     }
 
     for (i = 0; C[i] == ' '; i++)
@@ -135,18 +132,11 @@ int ProcessGeomFile()
         return 3;
     }
 
-    while (C[i] != EOF) //вывод оставшегося массива (ничего не должно остаться)
-    {
+    while (C[i] != EOF) {
         printf("%c", C[i]);
         i++;
     }
 
-    printf("%s(%f %f, %f)",
-           circleName,
-           x_circle,
-           y_circle,
-           radius); //есть проблема, что появляются погрешности в числах с
-                    //плавающей точкой
+    printf("%s(%f %f, %f)", circleName, x_circle, y_circle, radius);
     return 0;
 }
-
