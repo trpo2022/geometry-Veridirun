@@ -1,7 +1,7 @@
+#include "libgeometry/geom_string.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "geom_string.c"
 #define SIZE_STR 100
 
 float OutputCirclePerim(float r)
@@ -31,6 +31,5 @@ float OutputTriangleSq(
 
 int main()
 {
- 	return ProcessGeomFile();
+    return ProcessGeomFile();
 }
-
