@@ -1,16 +1,16 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 #define SIZE_STR 100
 
-
-int ProcessGeomFile() {
-   	FILE* file;
+int ProcessGeomFile()
+{
+    FILE* file;
     char* fname = "lab_input.txt"; //название файла
     file = fopen(fname, "r");      //открываем файл
 
     int C[SIZE_STR];
-    char circleName[]="circle";
+    char circleName[] = "circle";
     int i = 0;
     int iL, iD = 0, iR;
     float x_circle = 0, y_circle = 0, radius = 0;
@@ -39,7 +39,6 @@ int ProcessGeomFile() {
         && (C[i + 4] == 'l' || C[i + 4] == 'L')
         && (C[i + 5] == 'e' || C[i + 5] == 'E')
         && (C[i + 6] == ' ' || C[i + 6] == '(')) {
-
         i += 6;
     } else {
         printf("word circle is not correct\n");
@@ -49,7 +48,7 @@ int ProcessGeomFile() {
     for (; C[i] == ' '; i++)
         ;
     if ((C[i] == '(')) {
-        i ++;
+        i++;
     } else {
         printf("opening brackets are not correct\n");
         return 4;
@@ -65,7 +64,6 @@ int ProcessGeomFile() {
     }
     iR = i;
     i--;
-    
 
     for (; (i != iD) && iD != 0; i--) {
         x_circle += powf(10, -(i - iD)) * (C[i] - 48);
@@ -73,7 +71,7 @@ int ProcessGeomFile() {
     for (i--; i != iL - 1; i--) {
         x_circle += pow(10, (iD - i - 1)) * (C[i] - 48);
     }
-    
+
     i = iR;
     iD = 0;
 
@@ -88,7 +86,6 @@ int ProcessGeomFile() {
     }
     iR = i;
     i--;
-    
 
     for (; (i != iD) && iD != 0; i--) {
         y_circle += powf(10, -(i - iD)) * (C[i] - 48);
@@ -118,21 +115,21 @@ int ProcessGeomFile() {
     }
     iR = i;
     i--;
- 
+
     for (; (i != iD) && iD != 0; i--) {
         radius += powf(10, -(i - iD)) * (C[i] - 48);
     }
     for (i--; i != iL - 1; i--) {
         radius += pow(10, (iD - i - 1)) * (C[i] - 48);
     }
-    
+
     i = iR;
 
     for (; C[i] == ' '; i++)
         ;
-    
+
     if (C[i] == ')') {
-        i ++ ;
+        i++;
     } else {
         printf("closing brackets are not correct");
         return 3;
@@ -144,12 +141,12 @@ int ProcessGeomFile() {
         i++;
     }
 
-    printf("%s(%f %f, %f)", circleName,
+    printf("%s(%f %f, %f)",
+           circleName,
            x_circle,
            y_circle,
            radius); //есть проблема, что появляются погрешности в числах с
                     //плавающей точкой
     return 0;
 }
-    
-   
+
