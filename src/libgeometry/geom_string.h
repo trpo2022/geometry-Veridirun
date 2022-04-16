@@ -7,4 +7,3 @@ float OutputCirclePerim();
 float OutputCircleArea();
 
 void SkipSpaces();
-
