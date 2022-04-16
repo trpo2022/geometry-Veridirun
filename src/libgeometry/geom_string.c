@@ -3,6 +3,21 @@
 #include <stdlib.h>
 #define SIZE_STR 100
 
+float OutputCirclePerim(float r)
+{
+    return ((2 * (float)M_PI) * r);
+}
+
+float OutputCircleArea(float r)
+{
+    return ((float)M_PI * powf(r, 2));
+}
+
+void SkipSpaces(int C[], int *i){
+	for (; C[*i] == ' '; ++*i)
+    	;
+}
+
 int ProcessGeomFile()
 {
     FILE* file;
@@ -26,9 +41,9 @@ int ProcessGeomFile()
         i++;
         C[i] = fgetc(file);
     }
-
-    for (i = 0; C[i] == ' '; i++)
-        ;
+	i=0;
+    
+    SkipSpaces(C, &i);
 
     if ((C[i] == 'c' || C[i] == 'C') && (C[i + 1] == 'i' || C[i + 1] == 'I')
         && (C[i + 2] == 'r' || C[i + 2] == 'R')
@@ -42,8 +57,8 @@ int ProcessGeomFile()
         return 1;
     }
 
-    for (; C[i] == ' '; i++)
-        ;
+	SkipSpaces(C, &i);
+	
     if ((C[i] == '(')) {
         i++;
     } else {
@@ -51,8 +66,8 @@ int ProcessGeomFile()
         return 4;
     }
 
-    for (; C[i] == ' '; i++)
-        ;
+	SkipSpaces(C, &i);
+	
     iL = i;
     for (; C[i] != ' '; i++) { // start reading x_circle
         if (C[i + 1] == '.') {
@@ -72,8 +87,8 @@ int ProcessGeomFile()
     i = iR;
     iD = 0;
 
-    for (; C[i] == ' '; i++)
-        ;
+	SkipSpaces(C, &i);
+		
     iL = i;
     for (; (C[i] != ' ') && (C[i] != ',') && (C[i] != ')');
          i++) { // start reading y_circle
@@ -137,6 +152,8 @@ int ProcessGeomFile()
         i++;
     }
 
-    printf("%s(%f %f, %f)", circleName, x_circle, y_circle, radius);
+    printf("%s(%f %f, %f)\n", circleName, x_circle, y_circle, radius);
+    printf("Circle perimeter - %f, Area - %f", OutputCirclePerim(radius), OutputCircleArea(radius));
+    
     return 0;
 }

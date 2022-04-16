@@ -4,16 +4,6 @@
 #include <stdlib.h>
 #define SIZE_STR 100
 
-float OutputCirclePerim(float r)
-{
-    return 2 * M_PI * r;
-}
-
-float OutputCircleSq(float r)
-{
-    return M_PI * powf(r, 2);
-}
-
 float OutputTriangleSq(
         float x11, float x12, float x21, float x22, float x31, float x32)
 {
