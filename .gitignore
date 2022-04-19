@@ -1,6 +1,6 @@
 main
 main.exe
-lab_input.txt
+bin/lab_input.txt
 bin/geometry
 obj/src/geometry/main.d
 obj/src/geometry/main.o
