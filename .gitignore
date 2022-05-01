@@ -7,3 +7,4 @@ obj/src/geometry/main.o
 obj/src/libgeometry/geom_string.d
 obj/src/libgeometry/geom_string.o
 obj/src/libgeometry/libgeometry.a
+src/geomtemp/*
