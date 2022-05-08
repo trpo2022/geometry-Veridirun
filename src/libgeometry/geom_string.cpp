@@ -21,7 +21,7 @@ void SkipSpaces(char C[], int &i)
 
 int CountLines(FILE* file){
 	char c;
-	int lineAmount=1;
+	int lineAmount=0;
 	
 	c=getc(file);
 	if(c==EOF) 
@@ -110,8 +110,6 @@ double ReadNum(char *&C, int &i){
 int ProcessLine(char *&C, double *coords){
 	int i=0;
 	
-	int j;
-	
 	SkipSpaces(C,i);
 	
 	if(CheckWord(C,i)){
@@ -189,6 +187,9 @@ void PrintOne(double (*coords)[3], int i, int lineAmount){
 	printf("\n");
 }
 
+
+
+//'0'=48 '9'=57
 int ProcessGeomFile()
 {
 	int i;
@@ -211,32 +212,29 @@ int ProcessGeomFile()
 			case 0:
 				break;
 			case 1:
-				printf("word circle is not correct\n");
+				printf("word circle is not correct in line %d\n", i+1);
 				return 1;
 			case 2:
-				printf("expected opening bracket\n");
+				printf("expected opening bracket in line %d\n", i+1);
 				return 2;
 			case 3:
-				printf("number(s) is not correct\n");
+				printf("number(s) is not correct in line %d\n", i+1);
 				return 3;
 			case 4:
-				printf("expected comma\n");
+				printf("expected comma in line %d\n", i+1);
 				return 4;	
 			case 5:
-				printf("expected closing bracket\n");
+				printf("expected closing bracket in line %d\n", i+1);
 				return 5;
 			default:
-				printf("unknown error\n");
+				printf("unknown error in line %d\n", i+1);
 				break;
 		}
 	}
 	
-
-	
-//	for(i=0;i<lineAmount;i++){
-//		PrintOne(coords, i);
-//	}
+	for(i=0;i<lineAmount;i++){
+		PrintOne(coords, i, lineAmount);
+	}
 	
 	return 0;
 }
-
