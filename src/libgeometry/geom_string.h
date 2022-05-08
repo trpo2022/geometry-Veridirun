@@ -21,3 +21,5 @@ float ReadNum();
 int CheckNum();
 
 int ProcessLine();
+
+void PrintOne();
