@@ -71,15 +71,32 @@ int CheckWord(char *&C, int &i){
     }	
 }
 
+int CheckNum(char *C, int i){
+	while(C[i]!=' '){
+		if((C[i]<'0' || C[i]>'9') && C[i] != '.'){
+			return 3;
+		}
+		i++;
+	}
+	return 0;
+}
+
 float ReadNum(char *&C, char *temp, int &i){
-	
+	int j=0;
+	while(C[i]!=' '){
+		if(C[i]>='0'&&C[i]<='9' || C[i] == '.'){
+			temp[j]=C[i];
+			
+		}
+	}
 }
 
 int ProcessLine(char *&C, float *coords, int lineAmount){
 	int i=0;
 	
-	char temp[20];
+	char temp[20]; 
 	int j;
+	
 	SkipSpaces(C,i);
 	
 	if(CheckWord(C,i)){
@@ -90,8 +107,12 @@ int ProcessLine(char *&C, float *coords, int lineAmount){
 	
 	if(C[i]!='(')
 		return 2;
+	i++;
 	
 	SkipSpaces(C,i);
+	
+	if(CheckNum(C, i))
+		return 3;
 	
 	coords[0]=ReadNum(C, temp, i);
 	
@@ -126,6 +147,9 @@ int ProcessGeomFile()
 			case 2:
 				printf("expected opening bracket\n");
 				return 2;
+			case 3:
+				printf("number(s) are not correct\n");
+				return 3;
 			default:
 				break;
 		}

@@ -18,4 +18,6 @@ int CheckWord();
 
 float ReadNum();
 
+int CheckNum();
+
 int ProcessLine();
