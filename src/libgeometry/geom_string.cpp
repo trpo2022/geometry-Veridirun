@@ -165,12 +165,30 @@ int ProcessLine(char *&C, double *coords){
 	return 0;
 }
 
-void PrintOne(double (*coords)[3], int i){
-	char circleName[]="circle";
-	printf("%d. %s(%f %f, %f)\n", i+1, circleName, coords[i][0], coords[i][1], coords[i][2]);
+int CheckIntersection(double (*coords)[3], int i, int j){
+	if(i==j)
+		return 0;
+	double distance = sqrt(powf(fabs(coords[i][0]-coords[j][0]),2)+powf(fabs(coords[i][1]-coords[j][1]),2)); //distance between circles
+	if(distance<(coords[i][2]+coords[j][2]))
+		return 1;
+	return 0;
 }
 
-//'0'=48 '9'=57
+void PrintOne(double (*coords)[3], int i, int lineAmount){
+	int j;
+	char circleName[]="circle";
+	printf("%d. %s(%f %f, %f)\n", i+1, circleName, coords[i][0], coords[i][1], coords[i][2]);
+	printf(" perimeter = %f\n", OutputCirclePerim(coords[i][2]));
+	printf(" area = %f\n", OutputCircleArea(coords[i][2]));
+	printf(" intersects:\n");
+	for(j=0;j<=lineAmount;j++){
+		if(CheckIntersection(coords,i,j)){
+			printf("  %d. %s\n", j+1, circleName);
+		}
+	}
+	printf("\n");
+}
+
 int ProcessGeomFile()
 {
 	int i;

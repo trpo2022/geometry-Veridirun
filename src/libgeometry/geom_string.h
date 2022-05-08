@@ -22,4 +22,6 @@ int CheckNum();
 
 int ProcessLine();
 
+int CheckIntersection();
+
 void PrintOne();
