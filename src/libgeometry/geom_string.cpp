@@ -1,7 +1,5 @@
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#define SIZE_STR 100
+#include "geom_string.h"
+
 
 float OutputCirclePerim(float r)
 {
@@ -22,7 +20,7 @@ void SkipSpaces(char C[], int& i)
 int CountLines(FILE* file)
 {
     char c;
-    int lineAmount = 0;
+    int lineAmount = 0; //1 on windows, 0 on linux
 
     c = getc(file);
     if (c == EOF)
@@ -74,24 +72,27 @@ int CheckWord(char*& C, int& i)
     }
 }
 
-int CheckNum(char* C, int i)
+int CheckNum(char* C, int i, const char rightBorder)
 {
-    int flag = 0;
-    while (C[i] != ' ') {
+    int flagDot = 0;
+    int flagMinus = 0;
+    while ((C[i] != ' ') && (C[i]!=rightBorder)){
         if ((C[i] < '0' || C[i] > '9') && C[i] != '.' && C[i] != '-') {
-            //			printf("C[%d]=%c\n", i, C[i]);
             return 3;
         }
-        if (C[i] == '.' && flag) {
-            //			printf("C[%d]=%c\n", i, C[i]);
+        if (C[i] == '.' && flagDot) {
             return 3;
         }
-        if (C[i] == '.' && flag == 0) {
-            //			printf("C[%d]=%c\n", i, C[i]);
-            flag++;
+        if(C[i] == '-' && flagMinus) {
+        	return 3;
+        }
+        if (C[i] == '-' && flagMinus == 0) {
+            flagMinus++;
+        }
+        if (C[i] == '.' && flagDot == 0) {
+            flagDot++;
         }
         if (C[i] == '.' && C[i + 1] == ' ') {
-            //			printf("C[%d]=%c\n", i, C[i]);
             return 3;
         }
         i++;
@@ -99,11 +100,11 @@ int CheckNum(char* C, int i)
     return 0;
 }
 
-double ReadNum(char*& C, int& i)
+double ReadNum(char*& C, int& i, const char rightBorder)
 {
     char temp[20];
     int j = 0;
-    while (C[i] != ' ') {
+    while (C[i] != ' ' && C[i]!=EOF && C[i]!=rightBorder) {
         temp[j] = C[i];
         j++;
         i++;
@@ -130,17 +131,17 @@ int ProcessLine(char*& C, double* coords)
 
     SkipSpaces(C, i);
 
-    if (CheckNum(C, i))
+    if (CheckNum(C, i, ' '))
         return 3;
 
-    coords[0] = ReadNum(C, i);
+    coords[0] = ReadNum(C, i, ' ');
 
     SkipSpaces(C, i);
 
-    if (CheckNum(C, i))
+    if (CheckNum(C, i, ','))
         return 3;
 
-    coords[1] = ReadNum(C, i);
+    coords[1] = ReadNum(C, i, ',');
 
     SkipSpaces(C, i);
 
@@ -150,10 +151,10 @@ int ProcessLine(char*& C, double* coords)
 
     SkipSpaces(C, i);
 
-    if (CheckNum(C, i))
+    if (CheckNum(C, i, ')'))
         return 3;
 
-    coords[2] = ReadNum(C, i);
+    coords[2] = ReadNum(C, i, ')');
 
     SkipSpaces(C, i);
 
@@ -196,7 +197,7 @@ void PrintOne(double (*coords)[3], int i, int lineAmount)
     printf(" perimeter = %f\n", OutputCirclePerim(coords[i][2]));
     printf(" area = %f\n", OutputCircleArea(coords[i][2]));
     printf(" intersects:\n");
-    for (j = 0; j <= lineAmount; j++) {
+    for (j = 0; j < lineAmount; j++) {
         if (CheckIntersection(coords, i, j)) {
             printf("  %d. %s\n", j + 1, circleName);
         }
@@ -204,13 +205,16 @@ void PrintOne(double (*coords)[3], int i, int lineAmount)
     printf("\n");
 }
 
-//'0'=48 '9'=57
 int ProcessGeomFile()
 {
     int i;
     FILE* file;
     char fname[] = "lab_input.txt";
     file = fopen(fname, "r");
+    if(file==NULL){
+    	printf("Cannot open file");
+    	return -1;
+    }
 
     char** C;
 

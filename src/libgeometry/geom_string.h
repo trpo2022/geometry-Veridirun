@@ -1,5 +1,10 @@
 #pragma once
 
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE_STR 100
+
 float OutputCirclePerim();
 
 float OutputCircleArea();
