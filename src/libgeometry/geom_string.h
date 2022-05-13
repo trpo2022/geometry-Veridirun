@@ -9,7 +9,7 @@ float OutputCirclePerim(float);
 
 float OutputCircleArea(float);
 
-int ProcessGeomFile(const char *);
+int ProcessGeomFile(const char*);
 
 void SkipSpaces(char C[], int&);
 
@@ -27,6 +27,6 @@ int CheckNum(char*, int, const char);
 
 int ProcessLine(char*&, double*);
 
-int CheckIntersection(double *(coords)[3], int, int);
+int CheckIntersection(double*(coords)[3], int, int);
 
 void PrintOne(double (*coords)[3], int, int);

@@ -1,6 +1,5 @@
 #include "geom_string.h"
 
-
 float OutputCirclePerim(float r)
 {
     return ((2 * (float)M_PI) * r);
@@ -20,7 +19,7 @@ void SkipSpaces(char C[], int& i)
 int CountLines(FILE* file)
 {
     char c;
-    int lineAmount = 0; //1 on windows, 0 on linux
+    int lineAmount = 0; // 1 on windows, 0 on linux
 
     c = getc(file);
     if (c == EOF)
@@ -76,15 +75,15 @@ int CheckNum(char* C, int i, const char rightBorder)
 {
     int flagDot = 0;
     int flagMinus = 0;
-    while ((C[i] != ' ') && (C[i]!=rightBorder)){
+    while ((C[i] != ' ') && (C[i] != rightBorder)) {
         if ((C[i] < '0' || C[i] > '9') && C[i] != '.' && C[i] != '-') {
             return 3;
         }
         if (C[i] == '.' && flagDot) {
             return 3;
         }
-        if(C[i] == '-' && flagMinus) {
-        	return 3;
+        if (C[i] == '-' && flagMinus) {
+            return 3;
         }
         if (C[i] == '-' && flagMinus == 0) {
             flagMinus++;
@@ -104,7 +103,7 @@ double ReadNum(char*& C, int& i, const char rightBorder)
 {
     char temp[20];
     int j = 0;
-    while (C[i] != ' ' && C[i]!=EOF && C[i]!=rightBorder) {
+    while (C[i] != ' ' && C[i] != EOF && C[i] != rightBorder) {
         temp[j] = C[i];
         j++;
         i++;
@@ -205,15 +204,15 @@ void PrintOne(double (*coords)[3], int i, int lineAmount)
     printf("\n");
 }
 
-int ProcessGeomFile(const char *fname)
+int ProcessGeomFile(const char* fname)
 {
     int i;
     FILE* file;
-//    char fname[] = "lab_input.txt";
+    //    char fname[] = "lab_input.txt";
     file = fopen(fname, "r");
-    if(file==NULL){
-    	printf("Cannot open file");
-    	return -1;
+    if (file == NULL) {
+        printf("Cannot open file");
+        return -1;
     }
 
     char** C;

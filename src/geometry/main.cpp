@@ -2,6 +2,6 @@
 
 int main()
 {
-	const char fileName[] = "lab_input.txt";
+    const char fileName[] = "lab_input.txt";
     return ProcessGeomFile(fileName);
 }
