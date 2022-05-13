@@ -2,5 +2,6 @@ bin/lab_input.txt
 bin/geometry
 obj/src/*
 obj/test/*
+obj/test/test.o
 src/geomtemp/*
 bin/geometry_test
