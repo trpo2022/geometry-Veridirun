@@ -49,7 +49,7 @@ clean:
 	find $(OBJ_DIR) -name '*.d' -exec $(RM) '{}' \;
 
 .PHONY: test
-	test: $(TEST_NAME)
+test: $(TEST_PATH)
 
 $(TEST_PATH): obj/test/main.o obj/test/test.o obj/src/libgeometry/libgeometry.a
 	$(CC) $(CFLAGS) -o $@ $^
