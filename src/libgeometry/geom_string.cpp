@@ -205,11 +205,11 @@ void PrintOne(double (*coords)[3], int i, int lineAmount)
     printf("\n");
 }
 
-int ProcessGeomFile()
+int ProcessGeomFile(const char *fname)
 {
     int i;
     FILE* file;
-    char fname[] = "lab_input.txt";
+//    char fname[] = "lab_input.txt";
     file = fopen(fname, "r");
     if(file==NULL){
     	printf("Cannot open file");
