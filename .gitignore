@@ -2,3 +2,4 @@ bin/lab_input.txt
 bin/geometry
 obj/*
 src/geomtemp/*
+bin/geometry_test
