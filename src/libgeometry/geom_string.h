@@ -1,27 +1,32 @@
 #pragma once
 
-float OutputCirclePerim();
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE_STR 100
 
-float OutputCircleArea();
+float OutputCirclePerim(float);
 
-int ProcessGeomFile();
+float OutputCircleArea(float);
 
-void SkipSpaces();
+int ProcessGeomFile(const char*);
 
-int CountLines();
+void SkipSpaces(char C[], int&);
 
-void AllocateMemory();
+int CountLines(FILE*);
 
-void ReadLines();
+void AllocateMemory(char**&, int);
 
-int CheckWord();
+void ReadLines(FILE*, char**&, int);
+
+int CheckWord(char*&, int&);
 
 float ReadNum();
 
-int CheckNum();
+int CheckNum(char*, int, const char);
 
-int ProcessLine();
+int ProcessLine(char*&, double*);
 
-int CheckIntersection();
+int CheckIntersection(double*(coords)[3], int, int);
 
-void PrintOne();
+void PrintOne(double (*coords)[3], int, int);
