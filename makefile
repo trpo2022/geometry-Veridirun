@@ -59,3 +59,8 @@ obj/test/test.o: test/test.cpp
 
 obj/test/main.o: test/main.cpp
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $(TEST_CPPFLAGS) $< -o $@
+
+.PHONY: test-start
+test-start:
+	./$(TEST_PATH)
+
