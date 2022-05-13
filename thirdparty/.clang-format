@@ -1,7 +1,7 @@
 ---
 Language:        Cpp
 DisableFormat: true
-SortIncludes:false
+SortIncludes: false
 AccessModifierOffset: -4
 AlignAfterOpenBracket: AlwaysBreak
 AlignConsecutiveAssignments: false
