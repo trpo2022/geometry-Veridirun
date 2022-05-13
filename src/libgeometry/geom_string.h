@@ -5,28 +5,28 @@
 #include <stdlib.h>
 #define SIZE_STR 100
 
-float OutputCirclePerim();
+float OutputCirclePerim(float);
 
-float OutputCircleArea();
+float OutputCircleArea(float);
 
-int ProcessGeomFile();
+int ProcessGeomFile(const char *);
 
-void SkipSpaces();
+void SkipSpaces(char C[], int&);
 
-int CountLines();
+int CountLines(FILE*);
 
-void AllocateMemory();
+void AllocateMemory(char**&, int);
 
-void ReadLines();
+void ReadLines(FILE*, char**&, int);
 
-int CheckWord();
+int CheckWord(char*&, int&);
 
 float ReadNum();
 
-int CheckNum();
+int CheckNum(char*, int, const char);
 
-int ProcessLine();
+int ProcessLine(char*&, double*);
 
-int CheckIntersection();
+int CheckIntersection(double *(coords)[3], int, int);
 
-void PrintOne();
+void PrintOne(double (*coords)[3], int, int);
