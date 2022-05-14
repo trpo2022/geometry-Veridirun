@@ -44,6 +44,7 @@ $(OBJ_DIR)/%.o: %.cpp
 
 .PHONY: clean
 clean:
+	$(RM) $(TEST_PATH)
 	$(RM) $(APP_PATH) $(LIB_PATH)
 	find $(OBJ_DIR) -name '*.o' -exec $(RM) '{}' \;
 	find $(OBJ_DIR) -name '*.d' -exec $(RM) '{}' \;
